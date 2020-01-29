@@ -26,7 +26,7 @@ export function asset(
         // don't add the params if the asset already exists
         return next;
       }
-      return bucketParam(keyParam(template));
+      return bucketParam(keyParam(next));
     },
     {
       // type for output type

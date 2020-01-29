@@ -54,3 +54,5 @@ export function myStack(): TemplateSpec {
 function as<T>(value: T): T {
   return value;
 }
+
+console.log(JSON.stringify(myStack(), null, 2));

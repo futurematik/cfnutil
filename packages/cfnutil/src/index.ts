@@ -8,6 +8,7 @@ export * from './joinNames';
 export * from './output';
 export * from './OutputSpec';
 export * from './ParameterSpec';
+export * from './relativeEntries';
 export * from './resource';
 export * from './ResourceGroup';
 export * from './ResourceScope';
