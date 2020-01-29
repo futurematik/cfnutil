@@ -1,0 +1,19 @@
+{
+  "name": "testdeploy",
+  "version": "0.0.1",
+  "author": "Gordon Leigh <gordon.leigh@futurematik.co.uk>",
+  "repository": "https://github.com/futurematik/cfnspec",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "yarn clean && yarn lint && yarn compile",
+    "compile": "tsc",
+    "clean": "rm -rf lib/ dist/",
+    "lint": "eslint src/ --ext=ts,tsx",
+    "watch:compile": "tsc -w --preserveWatchOutput"
+  },
+  "dependencies": {
+    "@fmtk/cfntypes": "^0.2.1",
+    "@fmtk/cfnutil": "^0.0.1"
+  }
+}
