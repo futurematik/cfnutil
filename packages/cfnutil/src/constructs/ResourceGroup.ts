@@ -3,8 +3,8 @@ import {
   makeChildScope,
   ChildResourceScope,
 } from './ResourceScope';
-import { TemplateBuilder } from './TemplateBuilder';
-import { composeBuilders } from './composeBuilders';
+import { TemplateBuilder } from '../builders/TemplateBuilder';
+import { composeBuilders } from '../builders/composeBuilders';
 
 export interface ResourceGroup<Out> {
   (scope: ChildResourceScope): [TemplateBuilder[], Out];

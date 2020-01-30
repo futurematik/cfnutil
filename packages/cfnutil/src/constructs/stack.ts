@@ -1,6 +1,6 @@
 import { ResourceScope } from './ResourceScope';
-import { TemplateBuilder } from './TemplateBuilder';
-import { TemplateSpec } from './TemplateSpec';
+import { TemplateBuilder } from '../builders/TemplateBuilder';
+import { TemplateSpec } from '../output/TemplateSpec';
 
 export function stack(
   name: string,

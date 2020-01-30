@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import path from 'path';
 import yazl from 'yazl';
-import { TemplateBuilder } from './TemplateBuilder';
+import { TemplateBuilder } from '../builders/TemplateBuilder';
 import { AssetParams, asset } from './asset';
 
 export interface ZipAssetEntry {

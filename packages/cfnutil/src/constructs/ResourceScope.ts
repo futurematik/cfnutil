@@ -1,4 +1,4 @@
-import { joinNames } from './joinNames';
+import { joinNames } from '../util/joinNames';
 
 export interface ResourceScopeBase {
   readonly name: string;

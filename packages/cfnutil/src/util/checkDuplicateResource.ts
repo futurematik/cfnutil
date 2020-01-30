@@ -1,4 +1,4 @@
-import { TemplateSpec } from './TemplateSpec';
+import { TemplateSpec } from '../output/TemplateSpec';
 
 export function checkDuplicateResource(
   template: TemplateSpec,

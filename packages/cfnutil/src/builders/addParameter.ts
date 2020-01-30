@@ -1,8 +1,8 @@
-import { ParameterSpec } from './ParameterSpec';
+import { ParameterSpec } from '../output/ParameterSpec';
 import { TemplateBuilder } from './TemplateBuilder';
-import { TemplateSpec } from './TemplateSpec';
-import { checkDuplicateResource } from './checkDuplicateResource';
-import { checkName } from './checkName';
+import { TemplateSpec } from '../output/TemplateSpec';
+import { checkDuplicateResource } from '../util/checkDuplicateResource';
+import { checkName } from '../util/checkName';
 
 export function addParameter(
   name: string,

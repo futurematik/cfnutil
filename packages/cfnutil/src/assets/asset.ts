@@ -1,7 +1,7 @@
-import { TemplateBuilder } from './TemplateBuilder';
-import { addAsset } from './addAsset';
-import { addParameter } from './addParameter';
-import { ifChanged } from './ifChanged';
+import { TemplateBuilder } from '../builders/TemplateBuilder';
+import { addAsset } from '../builders/addAsset';
+import { addParameter } from '../builders/addParameter';
+import { ifChanged } from '../builders/ifChanged';
 
 export interface AssetParams {
   S3Bucket: string;

@@ -1,7 +1,7 @@
 import { TemplateBuilder } from './TemplateBuilder';
-import { TemplateSpec } from './TemplateSpec';
-import { AssetSpec } from './AssetSpec';
-import { checkName } from './checkName';
+import { TemplateSpec } from '../output/TemplateSpec';
+import { AssetSpec } from '../output/AssetSpec';
+import { checkName } from '../util/checkName';
 
 export function addAsset(name: string, asset: AssetSpec): TemplateBuilder {
   return (template): TemplateSpec => {

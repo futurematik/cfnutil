@@ -1,9 +1,9 @@
 import { ResourceType, AttributeTypeFor } from '@fmtk/cfntypes';
 import { ResourceScope } from './ResourceScope';
-import { TemplateBuilder } from './TemplateBuilder';
-import { ResourceSpec } from './ResourceSpec';
-import { joinNames } from './joinNames';
-import { addResource } from './addResource';
+import { TemplateBuilder } from '../builders/TemplateBuilder';
+import { ResourceSpec } from '../output/ResourceSpec';
+import { joinNames } from '../util/joinNames';
+import { addResource } from '../builders/addResource';
 import { makeResourceAttribs, WithRef } from './makeResourceAttribs';
 
 export function singletonResource<T extends ResourceType>(

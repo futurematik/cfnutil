@@ -1,6 +1,6 @@
 import { TemplateBuilder } from './TemplateBuilder';
 import { composeBuilders } from './composeBuilders';
-import { TemplateSpec } from './TemplateSpec';
+import { TemplateSpec } from '../output/TemplateSpec';
 
 export function ifChanged(
   primary: TemplateBuilder | TemplateBuilder[],

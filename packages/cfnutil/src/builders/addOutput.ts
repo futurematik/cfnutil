@@ -1,7 +1,7 @@
-import { OutputSpec } from './OutputSpec';
+import { OutputSpec } from '../output/OutputSpec';
 import { TemplateBuilder } from './TemplateBuilder';
-import { TemplateSpec } from './TemplateSpec';
-import { checkName } from './checkName';
+import { TemplateSpec } from '../output/TemplateSpec';
+import { checkName } from '../util/checkName';
 
 export function addOutput<T>(
   name: string,

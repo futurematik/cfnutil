@@ -1,5 +1,5 @@
 import { TemplateBuilder } from './TemplateBuilder';
-import { TemplateSpec } from './TemplateSpec';
+import { TemplateSpec } from '../output/TemplateSpec';
 
 export function composeBuilders(
   ...builders: (TemplateBuilder | TemplateBuilder[])[]

@@ -1,8 +1,8 @@
 import { ResourceScope } from './ResourceScope';
-import { TemplateBuilder } from './TemplateBuilder';
-import { addOutput } from './addOutput';
-import { joinNames } from './joinNames';
-import { OutputSpec } from './OutputSpec';
+import { TemplateBuilder } from '../builders/TemplateBuilder';
+import { addOutput } from '../builders/addOutput';
+import { joinNames } from '../util/joinNames';
+import { OutputSpec } from '../output/OutputSpec';
 
 export function output<T>(
   scope: ResourceScope,
