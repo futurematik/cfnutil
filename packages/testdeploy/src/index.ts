@@ -1,13 +1,50 @@
 import path from 'path';
-import { stack, resource, zipAsset, TemplateSpec } from '@fmtk/cfnutil';
+import {
+  stack,
+  resource,
+  zipAsset,
+  TemplateSpec,
+  resourceGroup,
+  ResourceScope,
+  awsStr,
+  AwsParams,
+} from '@fmtk/cfnutil';
 import {
   ResourceType,
   IAMRoleProps,
   LambdaFunctionProps,
+  ApiGatewayMethodProps,
 } from '@fmtk/cfntypes';
 
 export function myStack(): TemplateSpec {
   return stack('MyStack', scope => {
+    const [handler, handlerAttribs] = handlerGroup(scope, 'MyHandler');
+
+    const [restApi, restApiAttribs] = resource(scope, 'RestApi', {
+      Type: ResourceType.ApiGatewayRestApi,
+      Properties: {},
+    });
+
+    const [apiMethod] = resource(scope, 'ApiMethod', {
+      Type: ResourceType.ApiGatewayMethod,
+      Properties: as<ApiGatewayMethodProps>({
+        HttpMethod: 'GET',
+        RestApiId: restApiAttribs.ref,
+        ResourceId: restApiAttribs.RootResourceId,
+        Integration: {
+          IntegrationHttpMethod: 'POST',
+          Type: 'AWS_PROXY',
+          Uri: awsStr`arn:${AwsParams.Partition}:apigateway:eu-west-2:lambda:path/2015-03-31/functions/${handlerAttribs.lambdaArn}/invocations`,
+        },
+      }),
+    });
+
+    return [handler, restApi, apiMethod];
+  });
+}
+
+function handlerGroup(scope: ResourceScope, name: string) {
+  return resourceGroup(scope, name, scope => {
     const [role, roleAttribs] = resource(scope, 'HandlerRole', {
       Type: ResourceType.IAMRole,
       Properties: as<IAMRoleProps>({
@@ -36,7 +73,7 @@ export function myStack(): TemplateSpec {
       },
     ]);
 
-    const [handler] = resource(scope, 'HandlerFunc', {
+    const [handler, handlerAttribs] = resource(scope, 'HandlerFunc', {
       Type: ResourceType.LambdaFunction,
       Properties: as<LambdaFunctionProps>({
         Code: handlerCode,
@@ -46,7 +83,12 @@ export function myStack(): TemplateSpec {
       }),
     });
 
-    return [role, handler, handlerAsset];
+    return [
+      [role, handlerAsset, handler],
+      {
+        lambdaArn: handlerAttribs.Arn,
+      },
+    ];
   });
 }
 

@@ -4,6 +4,8 @@ export * from './addParameter';
 export * from './addResource';
 export * from './asset';
 export * from './AssetSpec';
+export * from './AwsParams';
+export * from './awsStr';
 export * from './joinNames';
 export * from './output';
 export * from './OutputSpec';
