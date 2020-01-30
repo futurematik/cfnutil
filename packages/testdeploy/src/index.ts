@@ -66,7 +66,7 @@ function handlerGroup(scope: ResourceScope, name: string) {
       }),
     });
 
-    const [handlerAsset, handlerCode] = zipAsset([
+    const [handlerAsset, handlerCode] = zipAsset('HandlerCode', [
       {
         source: path.resolve(__dirname, '../lib/lambda.js'),
         target: 'index.js',

@@ -8,9 +8,15 @@ import { checkName } from './checkName';
 export function addResource<T extends ResourceType>(
   name: string,
   resource: ResourceSpec<T>,
+  continueOnDuplicate = false,
 ): TemplateBuilder {
   return (template): TemplateSpec => {
     checkName(name);
+
+    if (continueOnDuplicate && name in template.Resources) {
+      return template;
+    }
+
     checkDuplicateResource(template, name);
 
     return {

@@ -15,6 +15,7 @@ export * from './resource';
 export * from './ResourceGroup';
 export * from './ResourceScope';
 export * from './ResourceSpec';
+export * from './singletonResource';
 export * from './stack';
 export * from './TemplateBuilder';
 export * from './TemplateSpec';

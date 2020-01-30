@@ -1,9 +1,13 @@
-import { ResourceScope, makeChildScope } from './ResourceScope';
+import {
+  ResourceScope,
+  makeChildScope,
+  ChildResourceScope,
+} from './ResourceScope';
 import { TemplateBuilder } from './TemplateBuilder';
-import { TemplateSpec } from './TemplateSpec';
+import { composeBuilders } from './composeBuilders';
 
 export interface ResourceGroup<Out> {
-  (scope: ResourceScope): [TemplateBuilder[], Out];
+  (scope: ChildResourceScope): [TemplateBuilder[], Out];
 }
 
 export function resourceGroup<Out>(
@@ -14,8 +18,5 @@ export function resourceGroup<Out>(
   const scope = makeChildScope(parent, name);
   const [builders, out] = def(scope);
 
-  return [
-    (template): TemplateSpec => builders.reduce((a, x) => x(a), template),
-    out,
-  ];
+  return [composeBuilders(builders), out];
 }

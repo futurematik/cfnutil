@@ -10,6 +10,7 @@ export interface ZipAssetEntry {
 }
 
 export function zipAsset(
+  description: string,
   files: ZipAssetEntry[],
   key?: string,
 ): [TemplateBuilder, AssetParams] {
@@ -26,6 +27,7 @@ export function zipAsset(
 
   return asset(
     key,
+    description,
     (): NodeJS.ReadableStream => {
       const zip = new yazl.ZipFile();
 

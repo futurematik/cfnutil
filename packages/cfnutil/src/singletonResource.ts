@@ -6,15 +6,16 @@ import { joinNames } from './joinNames';
 import { addResource } from './addResource';
 import { makeResourceAttribs, WithRef } from './makeResourceAttribs';
 
-export function resource<T extends ResourceType>(
+export function singletonResource<T extends ResourceType>(
   scope: ResourceScope,
-  name: string,
+  uuid: string,
   resource: ResourceSpec<T>,
 ): [TemplateBuilder, AttributeTypeFor<T> & WithRef] {
-  const fullName = joinNames(scope.name, name);
+  const name = `Singleton` + uuid;
+  const fullName = joinNames((scope.root || scope).name, name);
 
   return [
-    addResource(fullName, resource),
+    addResource(fullName, resource, /* continueOnDuplicate: */ true),
     makeResourceAttribs(resource.Type, fullName),
   ];
 }
