@@ -18,6 +18,7 @@ export * from './constructs/stack';
 
 export * from './deploy/generate';
 export * from './deploy/ReleaseManifest';
+export * from './deploy/stageRemote';
 
 export * from './output/AssetSpec';
 export * from './output/OutputSpec';

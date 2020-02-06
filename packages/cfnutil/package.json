@@ -31,6 +31,8 @@
   },
   "dependencies": {
     "@fmtk/cfntypes": "^0.2.1",
+    "@fmtk/validation": "^3.5.2",
+    "aws-sdk": "^2.612.0",
     "yazl": "^2.5.1"
   },
   "devDependencies": {

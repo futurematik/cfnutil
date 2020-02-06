@@ -9,6 +9,7 @@ import {
   awsStr,
   AwsParams,
   generate,
+  stageRemote,
 } from '@fmtk/cfnutil';
 import {
   ResourceType,
@@ -17,15 +18,29 @@ import {
   ApiGatewayMethodProps,
 } from '@fmtk/cfntypes';
 import { run } from './run';
+import rc from 'rc';
+import minimist from 'minimist';
+import { assertValid, ValidationMode } from '@fmtk/validation';
+import { validateCmdOptions } from './CmdOptions';
 
 run(async function main(args: string[]): Promise<void> {
-  const templateVersion = args[0];
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { _, config, configs, ...parsed } = rc(
+    'testdeploy',
+    {},
+    minimist(args),
+  );
+  const opts = assertValid(parsed, validateCmdOptions, {
+    mode: ValidationMode.JSON,
+  });
   const template = myStack();
 
-  await generate(template, {
+  const release = await generate(template, {
     outputDir: path.resolve(__dirname, '../dist'),
-    templateVersion,
+    templateVersion: opts.templateVersion,
   });
+
+  await stageRemote(opts, release.manifestPath, opts.bucketName);
 });
 
 function myStack(): TemplateSpec {

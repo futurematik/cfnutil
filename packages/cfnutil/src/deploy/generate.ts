@@ -10,10 +10,15 @@ export interface GenerateOptions {
   templateVersion?: string;
 }
 
+export interface GeneratedRelease {
+  manifestPath: string;
+  manifest: ReleaseManifest;
+}
+
 export async function generate(
   spec: TemplateSpec,
   { outputDir, templateVersion }: GenerateOptions,
-): Promise<ReleaseManifest> {
+): Promise<GeneratedRelease> {
   const templateName = templateVersion
     ? `${templateVersion}.template.json`
     : `template.json`;
@@ -77,12 +82,8 @@ export async function generate(
   }
 
   await Promise.all(assetCompletions);
+  const manifestPath = path.join(outputDir, manifestName);
+  await pfs.writeFile(manifestPath, JSON.stringify(manifest, null, 2), 'utf8');
 
-  await pfs.writeFile(
-    path.join(outputDir, manifestName),
-    JSON.stringify(manifest, null, 2),
-    'utf8',
-  );
-
-  return manifest;
+  return { manifestPath, manifest };
 }
