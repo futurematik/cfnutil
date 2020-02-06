@@ -16,7 +16,8 @@
       "env": {
         "FORCE_COLOR": "1",
         "DEBUG": "*"
-      }
+      },
+      "args": ["--templateVersion=debugging"]
     }
   ]
 }

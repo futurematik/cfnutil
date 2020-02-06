@@ -22,7 +22,7 @@ export function asset(
   const bucketParamName = `asset${cleanKey}Bucket`;
   const keyParamName = `asset${cleanKey}Key`;
 
-  const asset = addAsset(key, { generate });
+  const asset = addAsset(key, { bucketParamName, keyParamName, generate });
 
   const bucketParam = addParameter(bucketParamName, {
     Type: 'String',

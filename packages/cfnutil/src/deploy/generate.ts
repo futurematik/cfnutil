@@ -7,7 +7,7 @@ import { ReleaseManifest } from './ReleaseManifest';
 
 export interface GenerateOptions {
   outputDir: string;
-  templateVersion?: string;
+  templateVersion: string;
 }
 
 export interface GeneratedRelease {
@@ -19,13 +19,8 @@ export async function generate(
   spec: TemplateSpec,
   { outputDir, templateVersion }: GenerateOptions,
 ): Promise<GeneratedRelease> {
-  const templateName = templateVersion
-    ? `${templateVersion}.template.json`
-    : `template.json`;
-
-  const manifestName = templateVersion
-    ? `${templateVersion}.manifest.json`
-    : `manifest.json`;
+  const templateName = `${templateVersion}.template.json`;
+  const manifestName = `${templateVersion}.manifest.json`;
 
   outputDir = path.resolve(outputDir);
   await pfs.mkdir(outputDir, { recursive: true });
@@ -47,6 +42,7 @@ export async function generate(
   const manifest: ReleaseManifest = {
     template: templateName,
     assets: {},
+    version: templateVersion,
   };
 
   for (const assetId in spec.Assets) {
@@ -57,7 +53,11 @@ export async function generate(
       .generate()
       .pipe(
         makeHashStream(hash => {
-          manifest.assets[assetId] = changeExt(hash, path.extname(assetId));
+          manifest.assets[assetId] = {
+            file: changeExt(hash, path.extname(assetId)),
+            bucketParamName: asset.bucketParamName,
+            keyParamName: asset.keyParamName,
+          };
         }),
       )
       .pipe(fs.createWriteStream(assetPath, 'utf8'));
@@ -75,7 +75,7 @@ export async function generate(
 
         await pfs.rename(
           assetPath,
-          path.join(outputDir, manifest.assets[assetId]),
+          path.join(outputDir, manifest.assets[assetId].file),
         );
       })(),
     );

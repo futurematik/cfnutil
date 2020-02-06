@@ -29,7 +29,7 @@ export async function stageRemote(
     upload(s3, bucketName, path.basename(manifestPath), manifestDir),
     upload(s3, bucketName, manifest.template, manifestDir),
     ...Object.keys(manifest.assets).map(x =>
-      upload(s3, bucketName, manifest.assets[x], manifestDir),
+      upload(s3, bucketName, manifest.assets[x].file, manifestDir),
     ),
   ]);
 }

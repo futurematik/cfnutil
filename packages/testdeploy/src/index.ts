@@ -10,6 +10,8 @@ import {
   AwsParams,
   generate,
   stageRemote,
+  deployRelease,
+  ReleaseCapabilities,
 } from '@fmtk/cfnutil';
 import {
   ResourceType,
@@ -41,6 +43,20 @@ run(async function main(args: string[]): Promise<void> {
   });
 
   await stageRemote(opts, release.manifestPath, opts.bucketName);
+
+  if (opts.stage) {
+    console.log(`not releasing (because --stage was specified)`);
+  } else {
+    const result = await deployRelease(opts, {
+      bucketName: opts.bucketName,
+      capabilities: ReleaseCapabilities.NamedIam,
+      execute: opts.execute,
+      manifestKey: path.basename(release.manifestPath),
+      stackName: 'MyTestStack',
+    });
+
+    console.log(`released`, result);
+  }
 });
 
 function myStack(): TemplateSpec {

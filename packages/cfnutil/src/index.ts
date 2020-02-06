@@ -17,6 +17,7 @@ export * from './constructs/singletonResource';
 export * from './constructs/stack';
 
 export * from './deploy/generate';
+export * from './deploy/deployRelease';
 export * from './deploy/ReleaseManifest';
 export * from './deploy/stageRemote';
 
