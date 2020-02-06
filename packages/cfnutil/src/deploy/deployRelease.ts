@@ -65,7 +65,9 @@ export async function deployRelease(
 
   const exists = !!(
     stacks.StackSummaries &&
-    stacks.StackSummaries.find(x => x.StackName === stackName)
+    stacks.StackSummaries.find(
+      x => x.StackName === stackName && x.StackStatus !== 'REVIEW_IN_PROGRESS',
+    )
   );
 
   const parameters = Object.keys(params).reduce(
