@@ -16,6 +16,9 @@ export * from './constructs/ResourceScope';
 export * from './constructs/singletonResource';
 export * from './constructs/stack';
 
+export * from './deploy/generate';
+export * from './deploy/ReleaseManifest';
+
 export * from './output/AssetSpec';
 export * from './output/OutputSpec';
 export * from './output/ParameterSpec';

@@ -1,10 +1,11 @@
 import { TemplateBuilder } from './TemplateBuilder';
 import { TemplateSpec } from '../output/TemplateSpec';
+import { flatten } from '../util/flatten';
 
 export function composeBuilders(
   ...builders: (TemplateBuilder | TemplateBuilder[])[]
 ): TemplateBuilder {
-  const flatBuilders = flatten(...builders);
+  const flatBuilders = flatten(builders);
 
   if (flatBuilders.length === 0) {
     return (t): TemplateSpec => t;
@@ -15,8 +16,4 @@ export function composeBuilders(
 
   return (template): TemplateSpec =>
     flatBuilders.reduce((b, x) => x(b), template);
-}
-
-function flatten<T>(...items: (T | T[])[]): T[] {
-  return ([] as T[]).concat(...items);
 }

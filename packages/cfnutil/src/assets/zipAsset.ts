@@ -2,7 +2,7 @@ import crypto from 'crypto';
 import path from 'path';
 import yazl from 'yazl';
 import { TemplateBuilder } from '../builders/TemplateBuilder';
-import { AssetParams, asset } from './asset';
+import { AssetAttributes, asset } from './asset';
 
 export interface ZipAssetEntry {
   source: string;
@@ -13,9 +13,9 @@ export function zipAsset(
   description: string,
   files: ZipAssetEntry[],
   key?: string,
-): [TemplateBuilder, AssetParams] {
+): [TemplateBuilder, AssetAttributes] {
   if (!key) {
-    const hash = crypto.createHash('sha256');
+    const hash = crypto.createHash('sha1');
 
     for (const file of files) {
       hash.update(path.resolve(file.source));
@@ -26,8 +26,7 @@ export function zipAsset(
   }
 
   return asset(
-    key,
-    description,
+    { key: `${key}.zip`, description },
     (): NodeJS.ReadableStream => {
       const zip = new yazl.ZipFile();
 

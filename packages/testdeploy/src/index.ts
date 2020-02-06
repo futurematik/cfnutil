@@ -8,6 +8,7 @@ import {
   ResourceScope,
   awsStr,
   AwsParams,
+  generate,
 } from '@fmtk/cfnutil';
 import {
   ResourceType,
@@ -15,10 +16,21 @@ import {
   LambdaFunctionProps,
   ApiGatewayMethodProps,
 } from '@fmtk/cfntypes';
+import { run } from './run';
 
-export function myStack(): TemplateSpec {
+run(async function main(args: string[]): Promise<void> {
+  const templateVersion = args[0];
+  const template = myStack();
+
+  await generate(template, {
+    outputDir: path.resolve(__dirname, '../dist'),
+    templateVersion,
+  });
+});
+
+function myStack(): TemplateSpec {
   return stack('MyStack', scope => {
-    const [handler, handlerAttribs] = handlerGroup(scope, 'MyHandler');
+    const [handler, handlerAttribs] = handlerGroup(scope, 'My Handler');
 
     const [restApi, restApiAttribs] = resource(scope, 'RestApi', {
       Type: ResourceType.ApiGatewayRestApi,
@@ -96,5 +108,3 @@ function handlerGroup(scope: ResourceScope, name: string) {
 function as<T>(value: T): T {
   return value;
 }
-
-console.log(JSON.stringify(myStack(), null, 2));

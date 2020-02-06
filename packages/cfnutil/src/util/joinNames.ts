@@ -1,3 +1,5 @@
+import { sanitizeName } from './sanitizeName';
+
 export function joinNames(...names: string[]): string {
-  return names.join('');
+  return sanitizeName(names.join(''));
 }

@@ -2,19 +2,25 @@ import { TemplateBuilder } from '../builders/TemplateBuilder';
 import { addAsset } from '../builders/addAsset';
 import { addParameter } from '../builders/addParameter';
 import { ifChanged } from '../builders/ifChanged';
+import { sanitizeName } from '../util/sanitizeName';
 
 export interface AssetParams {
+  description?: string;
+  key: string;
+}
+
+export interface AssetAttributes {
   S3Bucket: string;
   S3Key: string;
 }
 
 export function asset(
-  key: string,
-  description: string,
+  { description, key }: AssetParams,
   generate: () => NodeJS.ReadableStream,
-): [TemplateBuilder, AssetParams] {
-  const bucketParamName = `asset${key}Bucket`;
-  const keyParamName = `asset${key}Key`;
+): [TemplateBuilder, AssetAttributes] {
+  const cleanKey = sanitizeName(key);
+  const bucketParamName = `asset${cleanKey}Bucket`;
+  const keyParamName = `asset${cleanKey}Key`;
 
   const asset = addAsset(key, { generate });
 
