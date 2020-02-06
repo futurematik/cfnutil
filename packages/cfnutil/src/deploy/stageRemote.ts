@@ -5,10 +5,14 @@ import { validateReleaseManifest, ReleaseManifest } from './ReleaseManifest';
 import { AwsConfig } from './AwsConfig';
 import { assertValid, ValidationMode } from '@fmtk/validation';
 
+export interface StagingOptions {
+  manifestPath: string;
+  bucketName: string;
+}
+
 export async function stageRemote(
   config: AwsConfig,
-  manifestPath: string,
-  bucketName: string,
+  { manifestPath, bucketName }: StagingOptions,
 ): Promise<void> {
   const manifestDir = path.resolve(path.dirname(manifestPath));
   let manifest: ReleaseManifest;

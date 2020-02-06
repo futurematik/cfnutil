@@ -42,7 +42,10 @@ run(async function main(args: string[]): Promise<void> {
     templateVersion: opts.templateVersion,
   });
 
-  await stageRemote(opts, release.manifestPath, opts.bucketName);
+  await stageRemote(opts, {
+    manifestPath: release.manifestPath,
+    bucketName: opts.bucketName,
+  });
 
   if (opts.stage) {
     console.log(`not releasing (because --stage was specified)`);
