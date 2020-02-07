@@ -18,15 +18,9 @@
   ],
   "scripts": {
     "build": "yarn clean && yarn lint && yarn compile",
-    "bumpfeat": "npm version minor && npm publish",
-    "bumpfix": "npm version patch && npm publish",
-    "bumpmajor": "npm version major && npm publish",
     "compile": "rollup -c",
     "clean": "rm -rf lib/ dist/",
     "lint": "eslint src/ --ext=ts,tsx",
-    "postversion": "git push --follow-tags",
-    "prepare": "yarn build",
-    "preversion": "yarn build",
     "watch:compile": "yarn run compile -w"
   },
   "dependencies": {

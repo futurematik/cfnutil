@@ -1,5 +1,5 @@
 export interface AwsConfig {
-  accessKeyId: string;
-  region: string;
-  secretAccessKey: string;
+  accessKeyId?: string;
+  region?: string;
+  secretAccessKey?: string;
 }

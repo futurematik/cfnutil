@@ -3,6 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "build": "yarn clean && yarn compile && yarn lint",
+    "clean": "lerna run clean --parallel",
+    "compile": "FORCE_COLOR=1 lerna run compile --stream",
+    "lint": "FORCE_COLOR=1 lerna run lint --parallel --stream",
+    "postversion": "git push --follow-tags",
+    "prepare": "yarn build",
+    "preversion": "yarn build",
     "watch:compile": "FORCE_COLOR=1 lerna run --stream --parallel watch:compile"
   },
   "devDependencies": {
