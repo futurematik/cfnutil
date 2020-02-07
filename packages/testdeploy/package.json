@@ -1,6 +1,6 @@
 {
   "name": "testdeploy",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Gordon Leigh <gordon.leigh@futurematik.co.uk>",
   "repository": "https://github.com/futurematik/cfnspec",
   "license": "MIT",
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@fmtk/cfntypes": "^0.2.1",
-    "@fmtk/cfnutil": "^0.0.4",
+    "@fmtk/cfnutil": "^0.0.5",
     "@fmtk/validation": "^3.5.2",
     "minimist": "^1.2.0",
     "rc": "^1.2.8"
