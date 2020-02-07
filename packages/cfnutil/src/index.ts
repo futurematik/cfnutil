@@ -9,6 +9,7 @@ export * from './builders/addResource';
 export * from './builders/TemplateBuilder';
 
 export * from './constructs/AwsParams';
+export * from './constructs/makeResourceAttribs';
 export * from './constructs/output';
 export * from './constructs/resource';
 export * from './constructs/ResourceGroup';
