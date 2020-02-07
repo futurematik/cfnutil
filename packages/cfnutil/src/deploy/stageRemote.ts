@@ -11,7 +11,7 @@ export interface StagingOptions {
 }
 
 export async function stageRemote(
-  config: AwsConfig,
+  config: AwsConfig | undefined,
   { manifestPath, bucketName }: StagingOptions,
 ): Promise<void> {
   const manifestDir = path.resolve(path.dirname(manifestPath));

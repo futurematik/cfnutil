@@ -24,7 +24,7 @@ export interface StackInfo {
 }
 
 export async function deployRelease(
-  config: AwsConfig,
+  config: AwsConfig | undefined,
   {
     bucketName,
     capabilities,
